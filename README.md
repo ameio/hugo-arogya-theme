@@ -1,4 +1,4 @@
-<h1 align=center>hugo-arogya-theme</h1>
+<h1 align=center>Hugo Arogya Theme</h1>
 
 <p align=center>
   <a href="https://github.com/gohugoio/hugo/releases/tag/v0.83.0" alt="Contributors">
@@ -9,47 +9,49 @@
       alt="follow on Twitter"></a>  
 </p>
 
-# hugo-arogya-theme
+# Hugo Arogya Theme
 
-Using this theme you can create a bloging site in hugo
+hugo arogya theme is bloging site in hugo
 
 You are free to modify, save, share, use or do whatever you want with it:
 
-## You can Access this theme using 2 methods
+## Setup theme in locally using following methods
 
-  ## Method-1 : Run this theme directly in your pc
+## Method-1 : Run this theme directly in your local pc
 
-    1. clone repo
-    2. run the following command
-      - hugo server -D --config "exampleSite/config.toml"
+    1. Clone this theme [repo](git@github.com:ameio/hugo-arogya-theme.git)
+    2. After succesfully clone go to the theme/examplesite  
+    3. Run the following command
+      - hugo server -D --themeDir "../.."
 
-  ## Method-2 : Use this theme in your project
+## Method-2 : Use this theme in your project
 
-    1. set up your hugo project
-    2. go to themes directory and clone this repo
-    3. cut all the folders from exampleSite folder and paste it on the root of your project directory
+    1. Set up your hugo project
+    2. go to themes directory and inside theme directory clone this [repo](git@github.com:ameio/hugo-arogya-theme.git)
+    3. Go to the example site folder and cut all the folders and paste it on the root of your project directory
     4. set theme name in your config.toml file
     5. run the following command for run the project
       - hugo server -D
 
 
-# For add mailing feature in your project do the following steps
+## For add mailing feature in your project do the following steps
 
-  1. generate your secure Token from https://smtpjs.com/ site
-  2. set the newly generated token in config.toml file
-  3. set your fromMail email address in config.toml file
-  4. set your bccMail email address  in config.toml file
+  1. Create smtp detail for mailing from [SMTP](https://smtpjs.com/)  
+  2. Generate your secure Token from https://smtpjs.com/ site
+  3. Set the newly generated token in config.toml file
+  4. Set your fromMail email address in config.toml file
+  5. Set your bccMail email address  in config.toml file
 
 ## Features
 ---
-- Google analytics support
-- Contact form Support
-- Responsive
-- Send email 
+- Multilangauge Supported
+- Google analytics supported
+- Contact form Supported with Email features
+- Responsive layout
 - Design with Atomic Layout
-- Multilangauge Support
 - Image Prosessing
 - Support Bootstra3
+
 
 
 
