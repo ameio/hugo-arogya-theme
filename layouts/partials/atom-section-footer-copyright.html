@@ -1,0 +1,9 @@
+<div class="row" style="margin-top: 20px;">
+    <!-- you cal also apply site map by following code  -->
+    {{ with .Site.GetPage "sitemap"}}
+    <div class="col-sm-4"><a href="{{ .Permalink }}">{{ .Title }}</a>
+    
+    </div>
+    {{ end }}
+    <div class="col-sm-8 text-right topPosition" style="padding-right: 70px; ">All Copyright Reserved By DEMO</div>
+ </div>

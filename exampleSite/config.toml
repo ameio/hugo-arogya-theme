@@ -1,0 +1,97 @@
+languageCode = "en-us"
+title = "Arogya"
+theme = "hugo-arogya-theme"
+themesDir = "../"
+
+DefaultContentLanguage = "en"
+defaultContentLanguageInSubdir = true
+
+# google analytics tracking id
+googleAnalytics = "" # your analitics ID
+
+[Params]
+CompanyName = "DEMO"
+secureToken = "" #add your secure token
+fromMail = " " #add your From email address
+bccMail = "" #add your BCC email address
+
+[Languages]
+[Languages.en]
+languageName = "EN"
+weight = 1
+languageCode = "en-US"
+address = "57/304, Anandnagar Flat,  Prahlad Nagar, Satellite, Ahmedabad, 380015"
+imageratio = "1 1.5 2 3"
+fillposition = "center"
+format= "webp"
+imagewidth = "390"
+sliderimagewidth ="1350"
+
+[Languages.ja]
+languageName = "JP"
+weight = 2
+languageCode = "ja-JP"
+address = "57/304, アナンドナガーフラット、,  プララッド・ナガル, 衛生, アーメダバード, 380015"
+imageratio = "1 1.5 2 3"
+fillposition = "center"
+format= "webp"
+imagewidth = "390"
+sliderimagewidth ="1350"
+
+
+[markup.goldmark.renderer]
+unsafe = true
+
+# en menu
+
+[[Languages.en.menu.main]]
+name    ="Home"
+url     = "/"
+weight = 1
+
+[[Languages.en.menu.main]]
+name    ="Herbs"
+url     ="herbs"
+weight = 2
+
+[[Languages.en.menu.main]]
+name    ="Disease"
+url     ="disease"
+weight = 3
+
+[[Languages.en.menu.main]]
+name    ="Aboutus"
+url     ="aboutus"
+weight = 4
+
+[[Languages.en.menu.main]]
+name    ="Contactus"
+url     ="contactus"
+weight = 5
+
+# ja menu
+
+[[Languages.ja.menu.main]]
+name    ="家"
+url     = "/"
+weight = 1
+
+[[Languages.ja.menu.main]]
+name    ="ハーブ"
+url     ="herbs"
+weight = 2
+
+[[Languages.ja.menu.main]]
+name    ="疾患"
+url     ="disease"
+weight = 3
+
+[[Languages.ja.menu.main]]
+name    ="私たちに関しては"
+url     ="aboutus"
+weight = 4
+
+[[Languages.ja.menu.main]]
+name    ="お問い合わせ"
+url     ="contactus"
+weight = 5

@@ -1,0 +1,98 @@
+{{ $Scratch := newScratch}}
+{{ $Scratch.Set "width" "" }}
+{{ $Scratch.Set "height" "" }}
+
+
+
+{{ $image := printf "%s" .Page.Params.Image }}
+{{ $image := .Page.Resources.GetMatch $image }}
+{{ $image }}
+{{ $defaultBackground := "Slider Image Not Available" }}
+{{ $srcimg := $image | default $defaultBackground }}
+
+<!-- {{ $srcimg }} -->
+
+{{ if eq $srcimg $defaultBackground }}
+{{ else }}
+
+
+
+{{ $srcimg_width := $srcimg.Width }}
+{{ $srcimg_height := 250 }}
+{{ $srcimg_ratio := div (float $srcimg_height) (float $srcimg_width) }}
+
+<!-- srcimg_height=={{ $srcimg_height }} -->
+<!-- deside width -->
+{{ $srcimg.Width }}>{{ .Site.Params.Sliderimagewidth}}
+{{ if gt $srcimg.Width .Site.Params.Sliderimagewidth }}
+{{ $getwidth := int .Site.Params.Sliderimagewidth }}
+{{ $Scratch.Set "width" $getwidth }}
+{{ else }}
+{{ $getwidth := int $srcimg_width }}
+{{ $Scratch.Set "width" $getwidth }}
+{{ end }}
+{{ $width := $Scratch.Get "width" }}
+w={{ $width }}
+{{ $ratio := float $srcimg_ratio }}
+
+<!-- deside height -->
+
+{{ $getheight := int (mul $width $ratio) }}
+{{ $Scratch.Set "height" $getheight }}
+{{ $height := $Scratch.Get "height" }}
+
+{{ $array := slice 1 2 3 }}
+{{ $dict := dict }}
+
+{{$fillposition:= string .Site.Params.fillposition }}
+{{$format:= string .Site.Params.format }}
+{{ $positionFormat:= print " " $fillposition " " $format }}
+
+{{ range $array }}
+{{$imgratio:= float .}}
+{{ $crop_prm := printf "%dx%d %s" (int (mul $width $imgratio)) (int (mul $height $imgratio)) ($positionFormat) }}
+{{ $cropsize:= print $crop_prm}}
+{{ $crop_img := $srcimg.Resize $cropsize }}
+{{ $dict = merge $dict (dict (string .) $crop_img.RelPermalink) }}
+{{ end }}
+
+{{ $scratch := .Scratch}}
+{{ .Scratch.Set "url" $dict }}
+<!-- disct=={{ $dict }} -->
+
+<style>
+    .jumbotron {
+        background:url('{{ index $dict "3" }}');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    @media only screen and (min-device-width: 320px) and (max-device-width: 414px) {
+        .jumbotron {
+            background:url('{{ index $dict "1" }}');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            padding: 95px 25px;
+        }
+    }
+
+    @media screen and (min-device-width: 415px) and (max-device-width: 1023px) {
+        .jumbotron {
+            background:url('{{ index $dict "2" }}');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            padding: 150px 25px;
+
+        }
+
+    }
+
+       
+</style>
+
+{{ end }}

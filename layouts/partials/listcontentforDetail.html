@@ -1,0 +1,33 @@
+<div class="container-fluid text-center bg-grey">
+  <!-- {{ $getpage:= .File.Dir }}
+    getpage =  {{ $getpage }}<br> -->
+  {{ $currentPage := .RelPermalink }}
+  <!-- currentPage =  {{ $currentPage }}<br> -->
+  {{ $dirpath := path.Dir $currentPage }}
+  <!-- dirpath = {{ $dirpath }}<br>  -->
+  {{ $dir := path.Dir $dirpath }}
+  <!-- dir = {{ $dir }}<br>  -->
+  {{ $dirname := path.Base $dir}}
+  <!-- dirname = {{ $dirname }}<br> -->
+
+  {{ $section := .Site.GetPage $dirname }}
+  <!-- section = {{ $section }}<br> -->
+
+  <h2>{{ $dirname }}</h2><br>
+
+  <div class="row text-center">
+    {{ range $section.Pages }}
+    <div class="col-sm-4" {{ if eq ( $currentPage ) ( .RelPermalink) }}  style="background-color: lightgray; pointer-events: none;" {{ end }}>
+      <a href="{{ .RelPermalink }}" style="text-decoration: none;">
+        <div class="thumbnail">
+          <!-- <img src="{{ .RelPermalink }}{{ .Params.Image}}" alt="Paris" width="400" height="300"> -->
+          {{ partial "image-process.html" . }}
+          <p><strong>{{ .Title }}</strong></p>
+          <!-- <p><strong>p= {{ .RelPermalink }}</strong></p> -->
+          <!-- <p><strong>c = {{ $currentPage }}</strong></p> -->
+        </div>
+      </a>
+    </div>
+    {{ end }}
+  </div>
+</div>

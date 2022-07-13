@@ -1,0 +1,44 @@
+{{ $currentpagelink := .Page.FirstSection.Permalink }}
+<!-- currentpagelink = {{ $currentpagelink }}<br> -->
+
+
+
+{{ $Scratch := newScratch}}
+{{ $Scratch.Set "nextUrl" "" }}
+{{ $Scratch.Set "Name" "" }}
+{{ $Scratch.Set "nextFlag" false }}
+
+{{ with .Site.GetPage "/" }}
+
+    {{ range .Pages }}
+        {{ $url := .Permalink }}
+        <!-- url = {{ $url }}<br>  -->
+        {{ $title := .Title }}
+        <!-- title = {{ $title }} <br> -->
+        {{ $nextFlagGet := $Scratch.Get "nextFlag" }}
+        <!-- {{ $nextFlagGet }} -->
+            {{ if eq ($url) ($currentpagelink) }}
+                <!-- url eq<br> -->
+                {{ $Scratch.Set "nextFlag" true }}
+            {{ end }}
+            {{ if eq ($nextFlagGet) (true) }}
+                <!-- flag eq<br> -->
+                {{ $Scratch.Set "nextUrl" $url }}
+                {{ $Scratch.Set "Name" $title }}
+                {{ $Scratch.Set "nextFlag" false }}
+            {{ end }}
+
+            
+    {{ end }}
+{{ end }}
+<br>
+{{ $nextUrlGet := $Scratch.Get "nextUrl" }}
+<!-- {{ $nextUrlGet }}<br> -->
+{{ $nextNameGet := $Scratch.Get "Name" }}
+<!-- {{ $nextNameGet }}<br> -->
+
+
+<div class="row">
+    <a href="{{ $nextUrlGet }}"><button class="btn btn-lg" style="background-color: gray;
+        color: white"><i class="fas fa-arrow-right"></i> {{ $nextNameGet }}</button></a>
+</div>

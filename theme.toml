@@ -1,0 +1,14 @@
+name = "hugo-arogya-theme"
+license = "MIT"
+licenselink = "https://github.com/yourname/yourtheme/blob/master/LICENSE"
+description = "Blogs topics cover ways to live a healthier lifestyle, foods to add to your diet, and more specific information on common Disease symptoms."
+homepage = "https://gethugothemes.com/products/arogya/"
+tags = ['multilingual', 'hugo-theme', 'hugo-templates', 'bootstrap', 'blog', 'responsive', 'contact-form', 'mobile', 'gethugothemes', 'herbs', 'diseases', 'health']
+features = ['multilingual', 'bootstrap','responsive']
+hugoVersion = "0.83.0"
+
+[author]
+  name = "Ameio Devloper"
+  
+
+

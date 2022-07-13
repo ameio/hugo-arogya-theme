@@ -1,0 +1,31 @@
+<div class="collapse navbar-collapse" id="myNavbar" >
+  <ul class="nav navbar-nav navbar-right" style="background-color: #9cbe9c;">     
+      {{ $current := . }}
+      <!-- {{ $currentPage := path.Base $current.Permalink }}
+
+      {{ $dirPath := path.Dir $current.RelPermalink }}
+
+      {{ $currentPage }} 
+     {{ $path := path.Dir $dirPath }}
+     {{ $parentPage := path.Base $path }}
+      {{ $parentPage }} -->
+
+      {{ range .Site.Menus.main }}
+      {{ $menu_item_url := .URL | relLangURL   }}
+          {{ $page_url:= $current.RelPermalink }}
+          {{ $data := path.Dir $page_url }}
+          <!-- {{ $menu_item_url }}<br>{{ $page_url }} -->
+
+        <!-- {{ $menuPage := path.Base (.URL | absLangURL) }} -->
+        <!-- <li class=" {{ if or (eq (path.Base $menuPage) (path.Base $page_url)) (eq ($menuPage) (path.Dir $data)) }} active {{ end }}"> -->
+          {{ $url := .URL |  absLangURL }}
+          {{ partial "atom-menuitem.html" (dict "content" . "menu_item_url" $menu_item_url "page_url" $page_url "data" $data "url"  $url ) }}
+      {{ end }}
+      
+      
+      {{ .Scratch.Set "IsStyle" "yes" }}
+      {{ partial "atom-langaugelist.html" . }}
+      {{ .Scratch.Delete "IsStyle" }}
+    </ul>
+    
+  </div>

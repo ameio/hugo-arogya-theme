@@ -1,0 +1,20 @@
+{{ define "main" }}
+<div class="container-fluid bg-grey">
+   {{ $title := .Title }}
+   <div class="row">
+      {{ range .Pages }}
+      <div class="col-12 col-md-4 box">
+         <div class="thumbnail">
+            <a href="{{ .Permalink }}">
+               
+               {{ partial "image-process.html" . }}
+            </a>
+            <a href="{{ .Permalink }}" style="text-decoration: none;">
+               <p class="text-center"><strong>{{ .Title }}</strong></p>
+            </a>            
+         </div>
+      </div>
+      {{ end }}
+   </div>
+</div>
+{{ end }}

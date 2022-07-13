@@ -1,0 +1,186 @@
+{{ if eq .Lang "en" }}
+<div class="row">
+   <div class="col-sm-6 form-group">
+      <input class="form-control" id="name" name="name" placeholder="Name" type="text" required>
+   </div>
+   <div class="col-sm-6 form-group">
+      <input class="form-control" id="email" name="email" placeholder="Email" type="email" required>
+   </div>
+</div>
+
+Upload CV
+<input class="form-control" type="file" id="cv" name="cv">
+Upload Resume
+<input class="form-control" type="file" id="resume" name="resume">
+
+<textarea class="form-control" id="feedback" name="feedback" placeholder="Feedback" rows="3"></textarea>
+<br>
+<div class="row">
+   <div class="col-sm-12 form-group">
+      <!-- <button class="btn btn-default pull-right" type="submit" onclick="sendmail()">Send</button> -->
+      <button class="btn btn-default pull-right" type="submit" id="submitbtn">Send</button>
+   </div>
+</div>
+{{ else }}
+<div class="row">
+   <div class="col-sm-6 form-group">
+      <input class="form-control" id="name" name="name" placeholder="名称" type="text" required>
+   </div>
+   <div class="col-sm-6 form-group">
+      <input class="form-control" id="email" name="email" placeholder="電子メール" type="email" required>
+   </div>
+</div>
+
+Upload CV
+<input class="form-control" type="file" id="cv" name="cv">
+Upload Resume
+<input class="form-control" type="file" id="resume" name="resume">
+
+<textarea class="form-control" id="feedback" name="feedback" placeholder="フィードバック" rows="3"></textarea>
+<br>
+<div class="row">
+   <div class="col-sm-12 form-group">
+      <!-- <button class="btn btn-default pull-right" type="submit"  onclick="sendmail()">送信</button> -->
+      <button class="btn btn-default pull-right" type="submit" id="submitbtn">送信</button>
+   </div>
+</div>
+{{ end }}
+<script src="https://smtpjs.com/v3/smtp.js"></script>
+<script>
+
+   document.getElementById("submitbtn").addEventListener("click", sendmail);
+ 
+   function sendmail() {
+
+    // console.log("sendmail fun");
+
+    let name = document.getElementById("name").value;
+    let email = document.getElementById("email").value;
+    let feedback = document.getElementById("feedback").value;
+
+    let cv = document.getElementById('cv').files[0];    
+    let resume = document.getElementById('resume').files[0];
+    var cvReader = new FileReader();
+    var resumeReader = new FileReader();
+    cvReader.readAsBinaryString(cv);
+    resumeReader.readAsBinaryString(resume);
+    // console.log(cvReader)   
+    // console.log(resumeReader)
+
+    let secureToken = {{ .Site.Params.secureToken }};
+    let bccMail = {{ .Site.Params.bccMail }};
+    let fromMail = {{ .Site.Params.fromMail }};
+    // console.log(secureToken)
+    // console.log(bccMail)
+    // console.log(fromMail)
+
+    let path = window.location.pathname;
+    let subject = "";
+    let body = "";
+    let showmessage = "";
+    if (path.includes('/en/'))
+    {
+    subject = "Contactus  Form Information"
+    body = `Hello,<br>Following are detail come from contact form:
+    <hr>
+    <br>
+    Name  : ${name} <br>
+    Email  : ${email} <br>
+    Feedback  : ${feedback} <br>`
+    showmessage = "your mail is submitted sucessfully..."
+    }
+    else 
+    {
+    subject = "お問い合わせフォームのご案内"
+    body = `こんにちは <br> 以下は、お問い合わせフォームからのお問い合わせ内容です。:
+    <hr>
+    <br>
+    名称  : ${name} <br>
+    電子メール  : ${email} <br>
+    フィードバック  : ${feedback} <br>`
+    showmessage = "メールの送信に成功しました。"   
+    } 
+    // console.log(showmessage)
+
+    const cvPromice = new Promise((resolve, reject) => {
+      cvReader.onload = function () {
+        resolve()
+        };
+      });  
+    
+    const resumePromice = new Promise((resolve, reject) => {
+    resumeReader.onload = function () {
+      resolve()
+      };
+    });
+
+  // following is use when u have multi attechment
+
+    Promise.all([resumePromice, cvPromice]).then((values) => { 
+      var cv_uri = "data:" + cv.type + ";base64," + btoa(cvReader.result); 
+      var resumeUri = "data:" + resume.type + ";base64," + btoa(resumeReader.result);
+      
+      // console.log("url")
+      // console.log(cv_uri)
+      // console.log(resumeUri)
+
+        Email.send({
+          SecureToken : secureToken,
+          To : email,
+          From : fromMail,
+          Bcc : bccMail,
+          Subject : subject,
+          Body : body,
+          Attachments : [
+            {
+              name : cv.name,
+          		data : cv_uri
+            },
+            {
+              name : resume.name,
+          		data : resumeUri
+            }
+          ]
+        }).then(
+          message => alert(showmessage)
+          );
+        });
+
+
+      
+  // following is use when u habe single attechment
+    // cvPromice.then(
+    //   function(value) { 
+    //     console.log("ok") 
+    //     console.log(cv.type) 
+    //     // console.log(cvReader.result) 
+    //     var cv_uri = "data:" + cv.type + ";base64," + btoa(cvReader.result);
+    //     console.log(cv_uri)
+
+        // Email.send({
+        // SecureToken : secureToken,
+        // To : email,
+        // From : fromMail,
+        // Bcc : bccMail,
+        // Subject : subject,
+        // Body : body,
+        // Attachments : [
+        //   	{
+        //   		name : cv.name,
+        //   		data : cv_uri
+        //   	}]
+        // }).then(
+        //   message => alert(showmessage)
+        // ); 
+         
+
+    //   },
+    //   function(error) { console.log("error") }
+    // );
+    
+
+         
+    
+   }
+   
+</script>

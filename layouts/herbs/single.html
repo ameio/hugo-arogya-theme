@@ -1,0 +1,16 @@
+{{ define "main" }}
+<div class="container-fluid bg-grey" >
+   <div class="row">
+      <div class="col-12 col-md-5">
+
+        {{ partial "image-process.html" . }}
+       
+      </div>
+      <div class="col-12 col-md-7">
+         <h2 style="margin-top:0px;" class="topPosition">{{ .Title }}</h2>
+         <p>{{ .Content }}</p>
+      </div>
+   </div>
+   {{ partial "listcontentforDetail.html" . }}
+</div>
+{{ end }}

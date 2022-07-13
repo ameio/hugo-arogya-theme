@@ -1,0 +1,19 @@
+{{ define "main" }}
+<div class="container-fluid bg-grey" >
+  {{ $title := .Title }}
+  {{ range .Pages }}
+   <div class="row" style="padding-bottom: 30px;">
+     <div class="col-sm-4">
+      {{ partial "image-process.html" . }}
+      <h4 style="text-align:center;"><strong> {{ $title }}</strong>
+     </div>
+     <div class="col-sm-8 card-body">
+       <h2 style="margin-top:0;">{{ .Title }}</h2>
+       <p style="padding-top: 20px;text-align: justify;">{{ .Summary }}</p>
+       <a href="{{ .Permalink }}"><button class="btn btn-lg" style="background-color: #9cbe9c;color:white">Read More</button></a>
+      </div>
+   </div>
+   {{ end }}
+</div>
+
+{{ end }}

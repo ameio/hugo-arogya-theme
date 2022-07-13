@@ -1,0 +1,21 @@
+<div class="row" style="padding-left: 12px;">
+    {{ with .Page.NextInSection }}
+       <a href="{{.Permalink}}">
+          <button class="btn btn-lg" style="background-color: gray;
+          color: white">        
+          <i class="fas fa-arrow-left"></i>      
+          {{.Title}}
+          </button>
+       </a>
+    {{ end }}
+    {{ with .Page.PrevInSection }}
+       <a href="{{.Permalink}}">
+          <button class="btn btn-lg" style="background-color: gray;
+          color: white">        
+          <i class="fas fa-arrow-right"></i>      
+          {{.Title}}
+          </button>
+       </a>
+    {{ end }}
+    
+</div>

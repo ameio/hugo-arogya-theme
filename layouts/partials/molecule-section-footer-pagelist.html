@@ -1,0 +1,18 @@
+{{ with .Site.GetPage "/" }}
+
+      {{range .Sections}}
+
+        {{ if or (eq (.Title) ("Sitemap")) (eq (.Title) ("サイトマップ")) }}
+        {{ else }}
+          <div class="col-sm-3">
+            <!-- {{ .RelPermalink }}<br><br> -->
+              {{ partial "atom-footer-section-pagetitle.html" . }}
+              {{ range .Pages }}            
+              {{ partial "atom-footer-section-subpagelist.html" . }}
+              {{ end }}
+          </div>
+        {{ end }}        
+
+      {{ end }}
+
+{{ end }}

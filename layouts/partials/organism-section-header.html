@@ -1,0 +1,18 @@
+<nav class="navbar navbar-default navbar-fixed-top" style="height: 80px !important;">
+    <div style="padding: 0px 15px;">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>                        
+        </button>
+        
+        {{ .Scratch.Set "classname" "navbar-brand" }}
+        {{ partial "atom-logoimage.html" . }}
+        {{ .Scratch.Delete "classname" }}
+      </div>
+      {{ partial "molecule-menu.html" . }}
+    </div>
+  </nav>
+  {{ partial "molecule-section-slider.html" . }}
+  

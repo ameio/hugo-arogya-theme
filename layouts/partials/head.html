@@ -1,0 +1,32 @@
+<head>
+    <!-- Theme Made By www.w3schools.com -->
+    <title>{{ .Site.Title }}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {{ $lang:= print site.Language }}
+    {{ if eq ($lang) ("en")}}
+      <meta 
+        name="description" 
+        content="make your life happy and heathy with herbs.">
+    {{ else }}
+      <meta 
+        name="description" 
+        content="ハーブであなたの人生を幸せで健康にしましょう">
+    {{ end }}
+    <link rel="preload" as="font">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet" type="text/css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet" type="text/css">
+    
+    <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+   
+    {{ partial "jsonld.html" . }}
+    
+    {{ $style := resources.Get "css/custom.css" }}
+    {{ $styles := slice $style | resources.Concat "bundle.css" | minify | fingerprint }}
+    <link rel="stylesheet" href="{{ $styles.Permalink }}" integrity="{{ $styles.Data.Integrity }}" crossorigin="anonymous">
+
+    
+  </head>

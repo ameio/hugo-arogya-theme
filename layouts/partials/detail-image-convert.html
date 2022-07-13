@@ -1,0 +1,8 @@
+
+{{ with .Page.Resources.GetMatch .Params.Image }}
+  
+  {{ with .Resize (printf "%dx%d webp" .Width .Height )}}
+  <img src='{{ `images/imageLoading.gif` | absURL }}' data-src='{{ .Permalink }}' alt="Paris" width="100%" height="100%" class="lazyload">
+    <!-- {{ .Permalink }} -->
+    {{ end }}
+{{ end }}

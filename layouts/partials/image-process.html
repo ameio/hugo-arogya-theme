@@ -1,0 +1,73 @@
+{{  $image := .Page.Resources.GetMatch .Params.Image }}
+
+ <!-- {{ "image is get" }} -->
+<!-- {{ $image }} -->
+{{ $defaultBackground := "Image Not Available" }}
+{{ $srcimg := $image | default $defaultBackground }}
+{{ if eq $srcimg $defaultBackground }}
+    <a href="{{.Page.Permalink}}{{$image}}" target="_blank"> <h3 style="color: red;">{{$defaultBackground}}</h3></a>
+{{ else }}
+    <!-- {{ "image get" }} -->
+    <!-- image origenal size -->
+    {{ $srcimg_width := $srcimg.Width }}
+    <!-- {{ $srcimg_width }} -->
+    {{ $srcimg_height := $srcimg.Height }}
+    {{ $srcimg_ratio := div (float $srcimg_height) (float $srcimg_width) }} 
+
+
+    {{ $Scratch := newScratch}}
+    {{ $Scratch.Set "width" "" }}
+    {{ $Scratch.Set "height" "" }}
+    
+    <!-- deside width -->
+    <!-- {{ $srcimg.Width }}>{{ .Site.Params.Imagewidth}} -->
+    {{ if gt $srcimg.Width .Site.Params.Imagewidth }}
+    {{ $getwidth := int .Site.Params.Imagewidth }}
+    {{ $Scratch.Set "width" $getwidth }}
+    {{ else }}
+        {{ $getwidth := int $srcimg_width }}
+        {{ $Scratch.Set "width" $getwidth }}
+    {{ end }}
+    {{ $width := $Scratch.Get "width" }}
+    <!-- {{ $width := 390 }} -->
+    <!-- get-width={{ $width }} -->
+
+    {{ $ratio := float  $srcimg_ratio }}
+
+    <!-- deside height -->
+
+    {{ $getheight := int (mul $width $ratio) }}
+    {{ $Scratch.Set "height" $getheight }}
+    {{ $height := $Scratch.Get "height" }}
+
+    <!-- -------------------------- -->
+
+    {{ $array:= split .Site.Params.Imageratio " " }}    
+    
+    {{ $dict := dict }}
+
+    {{$fillposition:= string .Site.Params.fillposition }}
+    {{$format:= string .Site.Params.format }}
+    {{ $positionFormat:= print " " $fillposition " " $format }}
+
+    {{ range $array }}
+    {{$imgratio:= float .}}
+    
+        {{ $crop_prm := printf "%dx%d %s" (int (mul $width $imgratio)) (int (mul $height $imgratio)) ($positionFormat) }}
+        {{ $cropsize:= print $crop_prm}}
+        {{/* {{ $cropsize:= print $crop_prm " webp"}} */}}
+        {{ $crop_img := $srcimg.Fill $cropsize }}
+        {{ $dict = merge $dict (dict (string .) $crop_img.RelPermalink) }}
+    {{ end }}
+
+    <img src='{{ `images/imageLoading.gif` | absURL }}' data-srcset='{{ range $array }}{{ printf "\n%s" (index $dict (string .)) }}{{ printf " %sx," (string .)}}{{ end }}' alt='Images Not Available' height="280" width="100%" style="object-fit: Fill;" class="lazyload" >
+
+    
+
+
+
+{{ end }}
+
+
+
+

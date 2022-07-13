@@ -1,0 +1,4 @@
+<li class=" {{ if or (eq (path.Base .menu_item_url) (path.Base .page_url)) (eq (.menu_item_url) (path.Dir .data)) }} active {{ end }}">
+        
+    <a href="{{ .url }}">{{ .content.Name }}</a>
+  </li>

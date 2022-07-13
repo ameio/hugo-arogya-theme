@@ -1,0 +1,12 @@
+<div class="container-fluid bg-grey">
+    <p style="text-align:justify">{{ .Content }}</p>
+    {{ range first 2 .Pages.ByWeight }}
+       <div class="row">
+          {{ partial "atom-home-section-title.html" . }}
+          <br>
+          {{ partial "atom-home-section-content.html" . }}
+          {{ partial "molecule-home-section-subpagelist.html" . }}
+       </div>
+      
+    {{ end }}
+ </div>

@@ -1,0 +1,15 @@
+{{ define "main" }}
+<div id="contact" class="container-fluid bg-grey">
+   <!-- <h2 class="text-center">CONTACT</h2> -->
+   <div class="row">
+     <div class="col-sm-5">
+      {{ .Content }}      
+     </div>
+
+     <div class="col-sm-7 slideanim">
+       {{ partial "contactus-form.html" . }}
+     </div>
+
+   </div>
+ </div>
+{{ end }}

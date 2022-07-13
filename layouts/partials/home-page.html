@@ -1,0 +1,23 @@
+<!-- <div class="container-fluid bg-grey">
+   <p style="text-align:justify">{{ .Content }}</p>
+   {{ range .Pages.ByWeight }}
+   
+   {{ if or (eq (.Title) ("Herbs")) (eq (.Title) ("Disease")) }}
+      <div class="row">
+         <h2 style="text-align:center">{{ .Title }}</h2>
+         <br>
+         <p style="text-align:justify">{{ .Content }}</p>
+         {{ range .RegularPages }}
+         <div class="col-sm-4">
+            <a href="{{ .Permalink }}">
+               <h4 style="background-color: gray;
+               padding: 5px;">{{ .Title }}</h4>
+            </a>
+         </div>
+         {{ end }}
+      </div>
+   {{ end }}  
+   {{ end }}
+</div> -->
+{{ partial "organism-section-home.html" . }}
+

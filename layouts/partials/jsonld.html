@@ -1,0 +1,8 @@
+<script type="application/ld+json">
+    {
+      "@context" : "https://schema.org",
+      "@graph":[
+      {{- (partial "website-jsonld" .) | htmlUnescape | safeJS }}          
+      ]
+    }
+</script>

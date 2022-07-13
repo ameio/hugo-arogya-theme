@@ -1,0 +1,6 @@
+{{ $IsStyle := .Scratch.Get "IsStyle" }}
+{{ range $.AllTranslations }}
+<li>
+   <a href="{{ .Permalink }}" style="color: white;text-decoration:none">{{ .Language.LanguageName }}</a>        
+</li>
+{{ end }}

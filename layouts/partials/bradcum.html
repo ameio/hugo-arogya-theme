@@ -1,0 +1,25 @@
+<div style="padding-left: 10px;">
+  <div class="row">
+    <div class="col-12">
+      <ol class="nav navbar-nav">
+        {{ template "breadcrumbnav" (dict "p1" . "p2" .) }}
+      </ol>
+      
+      {{ define "breadcrumbnav" }}
+      {{ if .p1.Parent }}
+      {{ template "breadcrumbnav" (dict "p1" .p1.Parent "p2" .p2 ) }}
+      {{ else if not .p1.IsHome }}
+      {{ template "breadcrumbnav" (dict "p1" .p1.Site.Home "p2" .p2 ) }}
+      {{ end }}
+      
+      <li class="inline-flex items-center">
+        <a href="{{.p1.Permalink}}" class="inline-flex items-center text-sm font-medium {{ if eq .p1 .p2 }} text-gray-400 {{ else }} text-gray-700 {{ end }}">{{ .p1.Title }}</a>
+        {{ if eq .p1 .p2 }}
+          {{ else }}
+              <!-- <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg> -->
+          {{ end }}
+      </li>
+      {{ end }}
+    </div>
+  </div>
+</div>

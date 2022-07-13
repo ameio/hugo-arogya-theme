@@ -1,0 +1,4 @@
+{{ $getclass := .Scratch.Get "classname" }}
+<a class="{{ $getclass }}" href="/">{{ .Scratch.Get "class" }}
+    <img src='{{ `images/imageLoading2.gif` | absURL }}' data-src='/images/logo.png' alt="logo not found" class="lazyload" style="background-color: white;">
+</a>

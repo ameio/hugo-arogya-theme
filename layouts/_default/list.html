@@ -1,0 +1,23 @@
+{{ define "main" }}
+<div class="container-fluid text-center bg-grey">
+   <h2>{{ .Title }}</h2>
+   <br>
+   <h4>What we have created</h4>
+   {{ $title := .Title }}
+   <div class="row text-center">
+      {{ range .Pages }}
+      <div class="col-sm-4">
+         <div class="thumbnail">
+            <img src="/{{ .Params.Image }}" alt="Paris" width="400" height="300">
+            <p><strong>{{ .Title }}</strong></p>
+            <p>{{ .Content }}</p>
+            <div class="panel-footer">
+               <h4><strong>{{ $title }}</strong></h4>
+               <a href="{{ .Permalink }}"><button class="btn btn-lg">Read Me</button></a>
+            </div>
+         </div>
+      </div>
+      {{ end }}   
+   </div>
+</div>
+{{ end }}

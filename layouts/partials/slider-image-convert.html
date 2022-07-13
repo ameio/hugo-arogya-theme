@@ -1,0 +1,11 @@
+{{ $image := printf "%s" .Page.Params.Image }}
+
+{{ $scratch := .Scratch}}
+{{ .Scratch.Set "url" ""}}
+{{ with .Page.Resources.GetMatch $image }}
+  
+  {{ with .Resize (printf "%dx%d webp" .Width .Height )}}
+  {{ $.Scratch.Set "url" .Permalink }}
+    {{ end }}
+    
+{{ end }}

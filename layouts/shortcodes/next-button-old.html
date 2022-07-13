@@ -1,0 +1,52 @@
+<!-- this short code use for create next btn in detail page -->
+<!--  use this short code only when the hugo's inbuild  next and privious page variable not worked-->
+
+{{ $currentpagelink := .Page.Permalink }}
+<!-- currentpagelink = {{ $currentpagelink }}<br> -->
+{{ $page := .Page.Section }}
+<!-- {{ $page }}<br> -->
+
+{{ $Scratch := newScratch}}
+{{ $Scratch.Set "nextUrl" "" }}
+{{ $Scratch.Set "Name" "" }}
+{{ $Scratch.Set "nextFlag" false }}
+
+{{ with .Site.GetPage $page }}
+
+    {{ range .Pages }}
+        {{ $url := .Permalink }}
+        <!-- url = {{ $url }}<br>  -->
+        {{ $title := .Title }}
+        <!-- title = {{ $title }} <br> -->
+        {{ $nextFlagGet := $Scratch.Get "nextFlag" }}
+        <!-- {{ $nextFlagGet }} -->
+            {{ if eq ($url) ($currentpagelink) }}
+                <!-- url eq<br> -->
+                {{ $Scratch.Set "nextFlag" true }}
+            {{ end }}
+            {{ if eq ($nextFlagGet) (true) }}
+                <!-- flag eq<br> -->
+                {{ $Scratch.Set "nextUrl" $url }}
+                {{ $Scratch.Set "Name" $title }}
+                {{ $Scratch.Set "nextFlag" false }}
+            {{ end }}
+
+            
+    {{ end }}
+{{ end }}
+<br>
+{{ $nextUrlGet := $Scratch.Get "nextUrl" }}
+<!-- {{ $nextUrlGet }}<br> -->
+{{ $nextNameGet := $Scratch.Get "Name" }}
+<!-- {{ $nextNameGet }}<br> -->
+
+
+<div class="row text-center">
+    <a href="{{ $nextUrlGet }}">
+        <button class="btn btn-lg" style="background-color: gray;
+        color: white">        
+        <i class="fas fa-arrow-right"></i>      
+        {{ $nextNameGet }}
+        </button>
+    </a>
+</div>
