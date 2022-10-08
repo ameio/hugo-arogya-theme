@@ -22,7 +22,7 @@ You are free to modify, save, share, use or do whatever you want with it:
     1. Clone this theme [repo](git@github.com:ameio/hugo-arogya-theme.git)
     2. After succesfully clone go to the theme/examplesite  
     3. Run the following command
-      - hugo server -D --themeDir "../.."
+      - hugo server -D --themesDir "../.."
 
 ## Method-2 : Use this theme in your project
 
